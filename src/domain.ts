@@ -12,6 +12,9 @@ interface MacroMetaData {
 
 interface NodeMetaData {
   path: string;
+  database: string;
+  schema: string;
+  alias: string;
 }
 
 interface SourceMetaData {

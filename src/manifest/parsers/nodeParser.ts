@@ -19,9 +19,9 @@ export class NodeParser {
             model.resource_type === DBTProject.RESOURCE_TYPE_SEED ||
             model.resource_type === DBTProject.RESOURCE_TYPE_SNAPSHOT
         )
-        .forEach(({ name, root_path, original_file_path }) => {
+        .forEach(({ name, root_path, original_file_path, database, schema, alias }) => {
           const fullPath = path.join(root_path, original_file_path);
-          modelMetaMap.set(name, { path: fullPath });
+          modelMetaMap.set(name, { path: fullPath, database, schema, alias });
         });
       resolve(modelMetaMap);
     });

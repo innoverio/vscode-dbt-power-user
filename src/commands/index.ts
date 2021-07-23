@@ -4,6 +4,7 @@ import { provideSingleton } from "../utils";
 import { InstallDBT } from "./installDBT";
 import { UpdateDBT } from "./updateDBT";
 import { RunModelType } from "../domain";
+import { ExecuteSQL } from "./executeSQL";
 
 @provideSingleton(VSCodeCommands)
 export class VSCodeCommands implements Disposable {
@@ -13,6 +14,7 @@ export class VSCodeCommands implements Disposable {
     private installDBT: InstallDBT,
     private updateDBT: UpdateDBT,
     private runModel: RunModel,
+    private executeSQL: ExecuteSQL,
   ) {
     this.disposables.push(
       commands.registerCommand("dbtPowerUser.runCurrentModel", () =>
@@ -38,7 +40,10 @@ export class VSCodeCommands implements Disposable {
       ),
       commands.registerCommand("dbtPowerUser.updateDBT", () =>
         this.updateDBT.updateDBTCommand()
-      )
+      ),
+      commands.registerCommand("dbtPowerUser.runSQL", () =>
+        this.executeSQL.executeSQL()
+      ),
     );
   }
 

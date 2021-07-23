@@ -83,6 +83,21 @@ export class DBTClient implements Disposable {
     await this.handlePythonExtension();
   }
 
+  async executeSQL(projectUri: Uri, sql: string) {
+    const sqlCommandProcess = this.executeCommand(
+      this.dbtCommandFactory.createSqlCommand(projectUri, sql)
+    );
+    try {
+      const output = await sqlCommandProcess.complete();
+      sqlCommandProcess.dispose();
+      const data = JSON.parse(output);
+      console.log(data);
+      // TODO: show in html window
+    } catch (err) {
+      // TODO
+    }
+  }
+
   async listModels(projectUri: Uri): Promise<void> {
     const listModelsDisabled = workspace
       .getConfiguration("dbt")
